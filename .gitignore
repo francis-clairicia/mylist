@@ -11,6 +11,10 @@ vgcore.*
 # Main used for debugging
 src/main.c
 
+# Copied headers to include directory
+include/mylist.h
+include/mylist/
+
 # Prerequisites
 *.d
 
