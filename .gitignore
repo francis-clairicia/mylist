@@ -1,3 +1,16 @@
+# Project files
+.vscode
+libmylist
+debug
+unit_tests
+coverage
+*.gcda
+*.gcno
+vgcore.*
+
+# Main used for debugging
+src/main.c
+
 # Prerequisites
 *.d
 
