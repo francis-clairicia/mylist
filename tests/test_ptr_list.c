@@ -371,9 +371,9 @@ TestList(ptr_list_clear, use_destructor_to_free_the_pointers,
     cr_assert_eq(ptr_list_insert(list, -1, value3), LIST_SUCCESS);
     list_clear(list);
     cr_assert(list_empty(list));
-    cr_assert_stdout_eq_str("Destroying an int pointer containing -4\n"
+    cr_assert_stdout_eq_str("Destroying an int pointer containing 5\n"
                             "Destroying an int pointer containing 27\n"
-                            "Destroying an int pointer containing 5\n");
+                            "Destroying an int pointer containing -4\n");
 }
 
 TestList(ptr_list_destroy, destroy_a_linked_list)
@@ -404,9 +404,9 @@ TestList(ptr_list_destroy, use_destructor_to_free_the_pointers,
     cr_assert_eq(ptr_list_insert(list, -1, value2), LIST_SUCCESS);
     cr_assert_eq(ptr_list_insert(list, -1, value3), LIST_SUCCESS);
     ptr_list_destroy(list);
-    cr_assert_stdout_eq_str("Destroying an int pointer containing -4\n"
+    cr_assert_stdout_eq_str("Destroying an int pointer containing 5\n"
                             "Destroying an int pointer containing 27\n"
-                            "Destroying an int pointer containing 5\n");
+                            "Destroying an int pointer containing -4\n");
 }
 
 TestList(ptr_list_dup, duplicate_a_linked_list)

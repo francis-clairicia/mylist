@@ -691,9 +691,9 @@ TestList(generic_list_clear, erase_all_nodes_using_a_custom_destructor,
     cr_assert_eq(list_len(list), 0);
     cr_assert_null(list_begin(list));
     cr_assert_null(list_end(list));
-    cr_assert_stdout_eq_str("Destroying a node containing -4\n"
+    cr_assert_stdout_eq_str("Destroying a node containing 5\n"
                             "Destroying a node containing 27\n"
-                            "Destroying a node containing 5\n");
+                            "Destroying a node containing -4\n");
 }
 
 TestList(generic_list_destroy, destroy_a_linked_list)
@@ -717,9 +717,9 @@ TestList(generic_list_destroy, destroy_a_linked_list_using_a_destructor,
     cr_assert_eq(generic_list_push_back(list, 27, int), LIST_SUCCESS);
     cr_assert_eq(generic_list_push_back(list, -4, int), LIST_SUCCESS);
     generic_list_destroy(list);
-    cr_assert_stdout_eq_str("Destroying a node containing -4\n"
+    cr_assert_stdout_eq_str("Destroying a node containing 5\n"
                             "Destroying a node containing 27\n"
-                            "Destroying a node containing 5\n");
+                            "Destroying a node containing -4\n");
 }
 
 TestList(generic_list_destroy, do_nothing_if_null_is_given)
