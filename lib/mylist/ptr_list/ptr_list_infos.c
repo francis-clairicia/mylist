@@ -9,7 +9,7 @@
 
 int intern_ptr_list_empty(const ptr_list_t *this)
 {
-    return (list_len(this) == 0);
+    return this->__c.size == 0;
 }
 
 size_t intern_ptr_list_length(const ptr_list_t *this)

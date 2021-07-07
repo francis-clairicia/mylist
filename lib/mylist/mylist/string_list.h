@@ -75,9 +75,9 @@ char **string_list_to_array(const string_list_t *list, size_t *length);
 // Each string is copied
 string_list_t *array_to_string_list(const char *const *array);
 
-// Create a string list with default values
-#define make_string_list(values...)    \
-    array_to_string_list(_FMT_ARRAY(const char *, values, 0L))
+// Create a string list with default strings
+#define make_string_list(strings...)    \
+    array_to_string_list(_FMT_ARRAY(const char *, strings, NULL))
 
 // Concatenate a list of string to an allocated str
 char *string_list_concat(

@@ -8,25 +8,16 @@
 #include <stdlib.h>
 #include "mylist/container.h"
 
-void destroy_node(node_t *node, node_dtor_t destructor)
+void destroy_node(node_t *node, node_dtor_t destructor, int use_free)
 {
     if (!node)
         return;
     if (node->data.ptr) {
         if (destructor) {
             destructor(node->data.ptr);
-        } else {
+        } else if (use_free != 0) {
             free(node->data.ptr);
         }
     }
-    free(node);
-}
-
-void destroy_ptr_node(node_t *node, node_dtor_t destructor)
-{
-    if (!node)
-        return;
-    if (destructor && node->data.ptr)
-        destructor(node->data.ptr);
     free(node);
 }

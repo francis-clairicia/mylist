@@ -8,10 +8,16 @@
 #ifndef MY_LIST_CONSTANTS_H_
 #define MY_LIST_CONSTANTS_H_
 
-enum LIST_RESULT
+enum ENUM_LIST_RESULT
 {
     LIST_ERROR = 0,
     LIST_SUCCESS = 1
+};
+
+enum ENUM_LIST_BOOL
+{
+    LIST_FALSE = 0,
+    LIST_TRUE = 1
 };
 
 /////////// Internal functions/Macros used for linked lists ///////////

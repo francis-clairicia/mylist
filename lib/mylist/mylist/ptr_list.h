@@ -77,10 +77,10 @@ void *ptr_list_to_array(const ptr_list_t *list, size_t *length);
 // If destructor is not NULL, the ptr_list grabs the ownership of the pointers
 ptr_list_t *array_to_ptr_list(const void *array, node_dtor_t destructor);
 
-// Create a pointer list with default values
+// Create a pointer list with default pointers
 // If destructor is not NULL, the ptr_list grabs the ownership of the pointers
-#define make_ptr_list(destructor, values...)    \
-    array_to_ptr_list(_FMT_ARRAY(const void *, values, NULL), destructor)
+#define make_ptr_list(destructor, pointers...)    \
+    array_to_ptr_list(_FMT_ARRAY(const void *, pointers, NULL), destructor)
 ///////////////////////////////////////////////////////////////
 
 ///////////// Add data to linked lists ///////////

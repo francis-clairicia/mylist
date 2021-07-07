@@ -43,7 +43,6 @@ string_list_t *string_list_create(void)
 
     if (list) {
         memcpy(list, &STRING_LIST_MODEL, sizeof(*list));
-        ((container_list_t *)(&list->__c))->__dtor__ = &free;
     }
     return list;
 }

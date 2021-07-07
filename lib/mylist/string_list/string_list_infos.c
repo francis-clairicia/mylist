@@ -9,7 +9,7 @@
 
 int intern_string_list_empty(const string_list_t *this)
 {
-    return (list_len(this) == 0);
+    return this->__c.size == 0;
 }
 
 size_t intern_string_list_length(const string_list_t *this)

@@ -54,12 +54,11 @@ node_t *create_ptr_node(void *ptr);
 node_t *create_string_node(const char *str);
 
 // Destroy a node, freeing the data inside using dtor
-// if dtor is NULL, the libC's free() will be used
-void destroy_node(node_t *node, node_dtor_t dtor);
-
-// Destroy a node, freeing the data inside using dtor
-// The pointer will not be free if dtor is NULL
-void destroy_ptr_node(node_t *node, node_dtor_t dtor);
+// If dtor is not NULL, this function will always be used
+// Otherwise:
+// If use_free == 0, the pointer will not be free,
+// else the libC's free() will be used
+void destroy_node(node_t *node, node_dtor_t dtor, int use_free);
 /////////////////////////////////////////////////////////////////////////////
 
 #endif /* !NODE_H_ */

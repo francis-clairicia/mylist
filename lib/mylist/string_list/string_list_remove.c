@@ -16,7 +16,7 @@ int intern_string_list_remove(string_list_t *this, const char *s)
     node = container_remove_node_from_data(list, s, 0, (data_cmp_t)&strcmp);
     if (!node)
         return LIST_ERROR;
-    destroy_node(node, list->__dtor__);
+    destroy_node(node, list->__dtor__, LIST_TRUE);
     return LIST_SUCCESS;
 }
 
@@ -29,6 +29,6 @@ int intern_string_list_remove_cmp(string_list_t *this, const char *s,
     node = container_remove_node_from_data(list, s, 0, comparator);
     if (!node)
         return LIST_ERROR;
-    destroy_node(node, list->__dtor__);
+    destroy_node(node, list->__dtor__, LIST_TRUE);
     return LIST_SUCCESS;
 }

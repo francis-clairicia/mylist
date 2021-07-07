@@ -9,7 +9,7 @@
 
 int intern_generic_list_empty(const list_t *this)
 {
-    return (list_len(this) == 0);
+    return this->__c.size == 0;
 }
 
 size_t intern_generic_list_length(const list_t *this)

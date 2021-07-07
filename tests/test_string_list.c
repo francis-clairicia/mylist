@@ -283,11 +283,11 @@ TestList(string_list_destroy, destroy_the_linked_list)
     string_list_destroy(list);
 }
 
-TestList(string_list_destructor, should_be_the_default_libc_free)
+TestList(string_list_destructor, should_be_null)
 {
     string_list_t *list = string_list_create();
 
-    cr_assert_eq(list_destructor(list), &free);
+    cr_assert_null(list_destructor(list));
 }
 
 TestList(string_list_dup, duplicate_list)
@@ -694,4 +694,36 @@ TestList(string_list_concat, with_separators)
 
     cr_assert_not_null(str);
     cr_assert_str_eq(str, "string_a----string_b----string_c");
+}
+
+TestList(string_list_concat, fill_length_pointer)
+{
+    string_list_t *list = make_string_list("string_a", "string_b", "string_c");
+    size_t length;
+    char *str = string_list_concat(list, "----", &length);
+    const char expected[] = "string_a----string_b----string_c";
+
+    cr_assert_not_null(str);
+    cr_assert_str_eq(str, expected);
+    cr_assert_eq(length, strlen(expected));
+}
+
+TestList(string_list_concat, does_nothing_with_null_list)
+{
+    size_t length;
+    char *str = string_list_concat(NULL, ", ", &length);
+
+    cr_assert_null(str);
+    cr_assert_eq(length, 0);
+}
+
+TestList(string_list_concat, creates_an_empty_string_if_the_list_is_empty)
+{
+    size_t length;
+    string_list_t *list = string_list_create();
+    char *str = string_list_concat(list, ", ", &length);
+
+    cr_assert_not_null(str);
+    cr_assert_str_empty(str);
+    cr_assert_eq(length, 0);
 }
