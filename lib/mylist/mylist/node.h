@@ -26,7 +26,7 @@ typedef struct data_node
 typedef void (*node_dtor_t)(void *);
 
 //!
-//! @brief The data comparator function type
+//! @brief The data comparator function type.
 //!        The function must returns 0 if the data match,
 //!        non-zero value otherwise
 //!
@@ -38,8 +38,8 @@ typedef int (*data_cmp_t)(const void *, const void *);
 typedef struct node_list
 {
     data_node_t data;            // The node data informations
-    struct node_list *previous;  ²
-    struct node_list *next;      ²
+    struct node_list *previous;  // A pointer to the previous node in the list
+    struct node_list *next;      // A pointer to the next node in the list
 } node_t;
 
 ///////////// Macros to get a data from a node_t struct pointer /////////////

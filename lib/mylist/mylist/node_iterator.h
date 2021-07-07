@@ -34,49 +34,83 @@ typedef struct node_iterator
 //!
 node_iterator_t node_iter_start(const node_t *start, size_t index);
 
+//!
+//! @brief Switch to the next node
+//!
+//! @param node The node iterator
+//!
 void node_iter_next(node_iterator_t *node);
 
+//!
+//! @brief Switch to previous node
+//!
+//! @param node The node iterator
+//!
 void node_iter_prev(node_iterator_t *node);
 
-// Get the first iterator
+//!
+//! @brief Get the first iterator
+//!
+//! @param list The linked list pointer
+//!
 #define list_iter_begin(list)   \
     node_iter_start(list_begin(list), 0)
 
-// Get the last iterator
+//!
+//! @brief Get the last iterator
+//!
+//! @param list The linked list pointer
+//!
 #define list_iter_end(list)     \
     node_iter_start(list_end(list), list_len(list) - 1)
 
-// macro for range loop using node_iterator_t
+//!
+//! @brief Macro for range loop using node_iterator_t from beginning to end
+//!
+//! @param it The name of the node iterator variable
+//! @param list The linked list
+//!
 #define list_foreach_iter(it, list)                     \
     for (node_iterator_t it = list_iter_begin(list);    \
         (it).data.ptr;                                  \
         node_iter_next(&it))
 
-// macro for range loop reversed using node_iterator_t
+//!
+//! @brief Macro for range loop using node_iterator_t from end to beginning
+//!
+//! @param it The name of the node iterator variable
+//! @param list The linked list
+//!
 #define list_foreach_reversed_iter(it, list)            \
     for (node_iterator_t it = list_iter_end(list);      \
         (it).data.ptr;                                  \
         node_iter_prev(&it))
 
-// Delete a node using an iterator (next)
+//!
+//! @brief Delete a node and set the iterator to the next node
+//!
+//! @param list The linked list pointer
+//! @param it The node iterator
+//!
 #define list_pop_iter_next(list, it)        \
     {                                       \
         size_t it##_index = (it).index;     \
         node_iter_next(&it);                \
-        if ((it).data.ptr) {                \
-            (it).index = it##_index;        \
-        }                                   \
+        (it).index = it##_index;            \
         list_pop(list, it##_index);         \
     }
 
-// Delete a node using an iterator (prev)
+//!
+//! @brief Delete a node and set the iterator to the previous node
+//!
+//! @param list The linked list pointer
+//! @param it The node iterator
+//!
 #define list_pop_iter_prev(list, it)        \
     {                                       \
         size_t it##_index = (it).index;     \
         node_iter_prev(&it);                \
-        if ((it).data.ptr) {                \
-            (it).index = it##_index;        \
-        }                                   \
+        (it).index = it##_index;            \
         list_pop(list, it##_index);         \
     }
 

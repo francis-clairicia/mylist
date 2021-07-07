@@ -11,8 +11,18 @@
 #include "container.h"
 #include "base_list.h"
 
+//!
+//! @brief The string comparator function type.
+//!        The function must returns 0 if the data match,
+//!        non-zero value otherwise
+//!
+typedef int (*string_cmp_t)(const char *, const char *);
+
 typedef struct string_linked_list string_list_t;
 
+//!
+//! @brief Structure for a linked list of strings
+//!
 struct string_linked_list
 {
     int (*const str_insert)(string_list_t *this, ssize_t idx, const char *str);
@@ -24,7 +34,7 @@ struct string_linked_list
     void (*const pop_back)(string_list_t *this);
     int (*const str_remove)(string_list_t *this, const char *str);
     int (*const str_remove_cmp)(string_list_t *this,
-                                const char *str, data_cmp_t comparator);
+                                const char *str, string_cmp_t comparator);
 
     void (*const clear)(string_list_t *this);
     string_list_t *(*const duplicate)(const string_list_t *this);
@@ -42,43 +52,72 @@ struct string_linked_list
 
     const node_t *(*const str_find)(const string_list_t *this, const char *str);
     const node_t *(*const str_find_cmp)(const string_list_t *this,
-                                        const char *str, data_cmp_t comparator);
+                                        const char *str,
+                                        string_cmp_t comparator);
     int (*const str_contains)(const string_list_t *this, const char *str);
 
     const container_list_t __c;
 };
 
-/////////// Init a linked list ///////////
-// (destructor is a pointer to the function to use to free the node data)
-//
+/////////// Init/destroy a linked list ///////////
 
-// Creates an initializes a new string linked list
+//!
+//! @brief Create an initialize a new string linked list
+//!
+//! @return The newly allocated list, or NULL in case of failure
+//!
 string_list_t *string_list_create(void);
-//////////////////////////////////////////
 
-/////////// Destroy a linked list ///////////
-
-// Free the whole linked list (nodes + structure)
-// allocated by string_list_create() and sets list variable to NULL
+//!
+//! @brief Free the whole linked list (nodes + structure),
+//!        allocated by string_list_create()
+//!
+//! @param list The list to destroy
+//!
 void string_list_destroy(string_list_t *list);
 ///////////////////////////////////////////////////////////////
 
 ///////////// Useful functions /////////////
 
-// Create a NULL-terminated array of strings from a string list
-// If length is not NULL, the array length is stored
-// Each pointer is the one stored in the list, so use free() to free the array
+//!
+//! @brief Create a NULL-terminated array of strings from a string list.
+//!        Each pointer is the one stored in the list, so use free()
+//!        to free the array
+//!
+//! @param list The string list
+//! @param length If not NULL, the array length is stored
+//! @return The allocated array
+//!
 char **string_list_to_array(const string_list_t *list, size_t *length);
 
-// Create a string list from a NULL-terminated array of strings
-// Each string is copied
+//!
+//! @brief Create a string list from a NULL-terminated array of strings.
+//!        Each string is copied
+//!
+//! @param array Pointer to the array
+//! @return The newly allocated list
+//!
 string_list_t *array_to_string_list(const char *const *array);
 
-// Create a string list with default strings
+//!
+//! @brief Create a string list with default strings.
+//!        Each string is copied
+//!
+//! @param strings Variadic. All the strings to store in the list
+//! @return (string_list_t *) The newly allocated list
+//!
 #define make_string_list(strings...)    \
     array_to_string_list(_FMT_ARRAY(const char *, strings, NULL))
 
-// Concatenate a list of string to an allocated str
+//!
+//! @brief Concatenate a list of string to an allocated str
+//! 
+//! @param list The string list
+//! @param separator The string to put between each string from the list.
+//!                  Can be NULL or an empty string
+//! @param length If not NULL, the string length is stored
+//! @return A new allocated string
+//!
 char *string_list_concat(
     const string_list_t *list,
     const char *separator,
@@ -118,7 +157,7 @@ char *string_list_concat(
 // Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
 // Returns LIST_ERROR for NULL comparator
 #define string_list_remove_cmp(list, str, comparator) \
-    (list)->str_remove_cmp((list), (str), (data_cmp_t)(comparator))
+    (list)->str_remove_cmp((list), (str), (comparator))
 //////////////////////////////////////////////////
 
 ///////////// Find node in list /////////////
@@ -135,7 +174,7 @@ char *string_list_concat(
 // Returns the node, or NULL if the string was not found
 // Returns NULL for NULL comparator
 #define string_list_find_cmp(list, str, comparator)    \
-    (list)->str_find_cmp((list), (str), (data_cmp_t)(comparator))
+    (list)->str_find_cmp((list), (str), (comparator))
 
 // Check if a string is in a generic list
 // Return 1 if it's 1, 0 otherwise

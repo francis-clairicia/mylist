@@ -65,6 +65,7 @@ struct generic_linked_list
 //!
 //! @param destructor A pointer to the function to use to free the node data,
 //!                   or NULL if there is no function to use
+//!                   and the libC's free() function will be used
 //! @return The newly allocated list, or NULL in case of failure
 //!
 list_t *generic_list_create(node_dtor_t destructor);
@@ -269,6 +270,7 @@ list_t *array_to_generic_list(
 //!                   non-zero value otherwise
 //! @return (int) LIST_SUCCESS if it was a success,
 //!         LIST_ERROR if the data was not found
+//!         or if 'comparator' is NULL
 //!
 #define generic_list_remove_cmp(list, data, type, comparator) \
     (list)->remove_cmp((list), _FMT_DATA(data, type), (data_cmp_t)(comparator))
@@ -285,6 +287,7 @@ list_t *array_to_generic_list(
 //!                   non-zero value otherwise
 //! @return (int) LIST_SUCCESS if it was a success,
 //!         LIST_ERROR if the data was not found
+//!         or if 'comparator' is NULL
 //!
 #define generic_list_remove_cmp_var(list, data, comparator) \
     (list)->remove_cmp((list), &(data), (data_cmp_t)(comparator))

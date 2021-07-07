@@ -15,7 +15,7 @@ const node_t *intern_string_list_find(const string_list_t *this, const char *s)
 
 const node_t *intern_string_list_find_cmp(const string_list_t *this,
                                         const char *s,
-                                        data_cmp_t comparator)
+                                        string_cmp_t comparator)
 {
-    return container_find_node(&this->__c, s, 0, comparator);
+    return container_find_node(&this->__c, s, 0, (data_cmp_t)comparator);
 }

@@ -47,7 +47,7 @@ int intern_string_list_remove(
 int intern_string_list_remove_cmp(
     string_list_t *this,
     const char *s,
-    data_cmp_t comparator
+    string_cmp_t comparator
 );
 
 void intern_string_list_clear(
@@ -104,7 +104,7 @@ const node_t *intern_string_list_find(
 const node_t *intern_string_list_find_cmp(
     const string_list_t *this,
     const char *str,
-    data_cmp_t comparator
+    string_cmp_t comparator
 );
 
 int intern_string_list_contains(
