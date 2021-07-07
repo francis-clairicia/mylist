@@ -29,7 +29,6 @@ static void test_methods(const string_list_t *list)
     cr_assert_not_null(list->__len__);
     cr_assert_not_null(list->__begin__);
     cr_assert_not_null(list->__end__);
-    cr_assert_not_null(list->__get_dtor__);
     cr_assert_not_null(list->str_find);
     cr_assert_not_null(list->str_find_cmp);
     cr_assert_not_null(list->str_contains);
@@ -281,13 +280,6 @@ TestList(string_list_destroy, destroy_the_linked_list)
     cr_assert_eq(string_list_push_back(list, "string_b"), LIST_SUCCESS);
     cr_assert_eq(string_list_push_back(list, "string_c"), LIST_SUCCESS);
     string_list_destroy(list);
-}
-
-TestList(string_list_destructor, should_be_null)
-{
-    string_list_t *list = string_list_create();
-
-    cr_assert_null(list_destructor(list));
 }
 
 TestList(string_list_dup, duplicate_list)

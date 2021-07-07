@@ -12,83 +12,165 @@
 
 ///////////// Delete data from linked lists ///////////
 
-// Delete a node at a certain index
+//!
+//! @brief Delete a node at a certain index
+//!
+//! @param list The linked list pointer
+//! @param index (long int) The position
+//!              (If negative, the search will begin at the end)
+//!
 #define list_pop(list, index)   \
     (list)->pop((list), (index))
 
-// Delete the first node
+//!
+//! @brief Delete the first node
+//!
+//! @param list The linked list pointer
+//!
 #define list_pop_front(list)    \
     (list)->pop_front((list))
 
-// Delete the last node
+//!
+//! @brief Delete the last node
+//!
+//! @param list The linked list pointer
+//! @return void
+//!
 #define list_pop_back(list)    \
     (list)->pop_back((list))
 
-// Delete all the nodes, making list empty
+//!
+//! @brief Delete all the nodes, making list empty
+//!
+//! @param list The linked list pointer
+//!
 #define list_clear(list)    \
     (list)->clear((list))
 //////////////////////////////////////////////////
 
 ///////////// Modify linked lists ///////////
 
-// Duplicates the linked list
-// This function will create a new list with each node data copied
+//!
+//! @brief Duplicate the linked list.
+//!        This function will create a new list with each node data copied.
+//!        If the list has a destructor, the duplicate should not have it.
+//!
+//! @param list The linked list pointer
+//! @return The new linked list
+//!
 #define list_dup(list)      \
     (list)->duplicate((list))
 
-// Merge two lists, making the list2 empty
+//!
+//! @brief Merge two lists, making the 'list2' empty
+//!
+//! @param list1 The linked list pointer receiving the nodes
+//! @param list2 The linked list pointer to merge
+//!
 #define list_merge(list1, list2)    \
     (list1)->merge((list1), (list2))
 
-// Reverse a list
+//!
+//! @brief Reverse a list
+//!
+//! @param list The linked list pointer
+//!
 #define list_reverse(list)  \
     (list)->reverse((list))
 
-// Put the first node of the list at the end
+//!
+//! @brief Put the first node of the list at the end
+//!
+//! @param list The linked list pointer
+//!
 #define list_rotate_begin(list) \
     (list)->rotate_begin((list))
 
-// Put the last node of the list at the start
+//!
+//! @brief Put the last node of the list at the start
+//!
+//! @param list The linked list pointer
+//!
 #define list_rotate_end(list) \
     (list)->rotate_end((list))
 //////////////////////////////////////////////////
 
 ///////////// List informations /////////////
 
-// Get the list's length (the number of nodes)
+//!
+//! @brief Get the list's length
+//!
+//! @param list The linked list pointer
+//! @return (size_t) The number of nodes
+//!
 #define list_len(list) \
     (list)->__len__((list))
 
-// Check if the list is empty
-// Returns 1 if the list is empty else 0
+//!
+//! @brief Check if the list is empty
+//!
+//! @param list The linked list pointer
+//! @return (int) LIST_TRUE if the list is empty else LIST_FALSE
+//!
 #define list_empty(list) \
     (list)->empty((list))
 
-// Get the list's node data destructor function pointer
+//!
+//! @brief Get the list's node data destructor function pointer
+//!
+//! @param list The linked list pointer
+//! @return (node_dtor_t) The function pointer or NULL
+//!
 #define list_destructor(list) \
     (list)->__get_dtor__((list))
 //////////////////////////////////////////////////
 
 ///////////// Get/Find node in list /////////////
 
-// Get the first node pointer
+//!
+//! @brief Get the first node pointer
+//!
+//! @param list The linked list pointer
+//! @return (const node_t *) A node pointer, or NULL if the list is empty
+//!
 #define list_begin(list)    \
     (list)->__begin__((list))
 
-// Get the last node pointer
+//!
+//! @brief Get the last node pointer
+//!
+//! @param list The linked list pointer
+//! @return (const node_t *) A node pointer, or NULL if the list is empty
+//!
 #define list_end(list)    \
     (list)->__end__((list))
 
-// Get the node pointer at index, returning NULL if none was found
-// (If 'index' is negative the search will begin at the end)
+//!
+//! @brief Get a node pointer at index
+//!
+//! @param list The linked list pointer
+//! @param index (long int) The position.
+//!              (If negative the search will begin at the end)
+//! @return (const node_t *) A node pointer, or NULL if the node was not found
+//!
 #define list_get(list, index)   \
     (list)->get((list), (index))
 
-// macro for range loop
+//!
+//! @brief macro for range loop from beginning to end
+//!
+//! @param node The name of the node variable
+//! @param list The linked list pointer
+//!
 #define list_foreach(node, list)    \
     for (const node_t *node = list_begin(list); node; node = (node)->next)
 
-// macro for range loop reversed
+//!
+//! @brief macro for range loop from end to beginning
+//!
+//! @param node The name of the node variable
+//! @param list The linked list pointer
+//!
 #define list_foreach_reversed(node, list)    \
     for (const node_t *node = list_end(list); node; node = (node)->previous)
 

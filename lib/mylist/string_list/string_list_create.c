@@ -30,7 +30,6 @@ static const string_list_t STRING_LIST_MODEL =
     .__len__ = &intern_string_list_length,
     .__begin__ = &intern_string_list_begin,
     .__end__ = &intern_string_list_end,
-    .__get_dtor__ = &intern_string_list_get_dtor,
     .str_find = &intern_string_list_find,
     .str_find_cmp = &intern_string_list_find_cmp,
     .str_contains = &intern_string_list_contains,

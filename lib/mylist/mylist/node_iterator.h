@@ -11,21 +11,32 @@
 #include "node.h"
 #include "base_list.h"
 
+//!
+//! @brief The node iterator structure
+//!
 typedef struct node_iterator
 {
-    data_node_t data;
-    size_t index;
-    const node_t *previous;
-    const node_t *next;
+    data_node_t data;        // The node data informations
+    size_t index;            // The node position in the list
+    const node_t *previous;  // A pointer to the previous node in the list
+    const node_t *next;      // A pointer to the next node in the list
 } node_iterator_t;
 
+///////////// Functions/Macros to use a node iterator /////////////
+
+//!
+//! @brief Create a new node iterator object
+//!
+//! @param start The first node
+//! @param index The first node's position in the list
+//!              (between 0 and list_len(list) - 1 included)
+//! @return The node iterator
+//!
 node_iterator_t node_iter_start(const node_t *start, size_t index);
 
 void node_iter_next(node_iterator_t *node);
 
 void node_iter_prev(node_iterator_t *node);
-
-///////////// Get/Find node in list /////////////
 
 // Get the first iterator
 #define list_iter_begin(list)   \

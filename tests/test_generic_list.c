@@ -758,6 +758,14 @@ TestList(generic_list_duplicate, duplicate_an_empty_list)
     cr_assert_eq(list_len(list2), list_len(list1));
 }
 
+TestList(generic_list_duplicate, should_not_have_destructor)
+{
+    list_t *list1 = generic_list_create((node_dtor_t)&custom_int_destructor);
+    list_t *list2 = list_dup(list1);
+
+    cr_assert_null(list_destructor(list2));
+}
+
 TestList(generic_list_merge, merge_two_linked_lists)
 {
     list_t *list1 = generic_list_create(NULL);

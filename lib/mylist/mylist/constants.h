@@ -8,16 +8,22 @@
 #ifndef MY_LIST_CONSTANTS_H_
 #define MY_LIST_CONSTANTS_H_
 
+//!
+//! @brief enum to state an action on a linked list
+//!
 enum ENUM_LIST_RESULT
 {
-    LIST_ERROR = 0,
-    LIST_SUCCESS = 1
+    LIST_ERROR = 0,   // An error occured
+    LIST_SUCCESS = 1  // The action was a success
 };
 
+//!
+//! @brief simple boolean state
+//!
 enum ENUM_LIST_BOOL
 {
-    LIST_FALSE = 0,
-    LIST_TRUE = 1
+    LIST_FALSE = 0, // 'false' boolean
+    LIST_TRUE = 1   // 'true' boolean
 };
 
 /////////// Internal functions/Macros used for linked lists ///////////

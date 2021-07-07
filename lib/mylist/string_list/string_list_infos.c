@@ -26,8 +26,3 @@ const node_t *intern_string_list_end(const string_list_t *this)
 {
     return this->__c.end;
 }
-
-node_dtor_t intern_string_list_get_dtor(const string_list_t *this)
-{
-    return this->__c.__dtor__;
-}

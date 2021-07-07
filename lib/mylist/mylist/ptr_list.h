@@ -91,7 +91,7 @@ ptr_list_t *array_to_ptr_list(const void *array, node_dtor_t destructor);
 #define ptr_list_insert(list, index, ptr) \
     (list)->ptr_insert((list), (index), (ptr))
 
-// Insert a pointer at the begin of the list
+// Insert a pointer at the beginning of the list
 // Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
 #define ptr_list_push_front(list, ptr)   \
     (list)->ptr_push_front((list), (ptr))

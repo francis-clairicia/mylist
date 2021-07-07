@@ -39,7 +39,6 @@ struct string_linked_list
     size_t (*const __len__)(const string_list_t *this);
     const node_t *(*const __begin__)(const string_list_t *this);
     const node_t *(*const __end__)(const string_list_t *this);
-    node_dtor_t (*const __get_dtor__)(const string_list_t *this);
 
     const node_t *(*const str_find)(const string_list_t *this, const char *str);
     const node_t *(*const str_find_cmp)(const string_list_t *this,
@@ -95,7 +94,7 @@ char *string_list_concat(
 #define string_list_insert(list, index, str) \
     (list)->str_insert((list), (index), (str))
 
-// Insert a string at the begin of the list
+// Insert a string at the beginning of the list
 // Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
 #define string_list_push_front(list, str) \
     (list)->str_push_front((list), (str))

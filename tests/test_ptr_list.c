@@ -428,6 +428,14 @@ TestList(ptr_list_dup, duplicate_a_linked_list)
     cr_assert_eq(NODE_PTR(list_get(list2, 2), int), &value3);
 }
 
+TestList(ptr_list_dup, should_not_have_destructor)
+{
+    ptr_list_t *list = ptr_list_create((node_dtor_t)&custom_int_destructor);
+    ptr_list_t *list2 = list_dup(list);
+
+    cr_assert_null(list_destructor(list2));
+}
+
 TestList(ptr_list_dup, duplicate_an_empty_list)
 {
     ptr_list_t *list = ptr_list_create(NULL);

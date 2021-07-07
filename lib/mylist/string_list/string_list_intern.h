@@ -96,10 +96,6 @@ const node_t *intern_string_list_end(
     const string_list_t *this
 );
 
-node_dtor_t intern_string_list_get_dtor(
-    const string_list_t *this
-);
-
 const node_t *intern_string_list_find(
     const string_list_t *this,
     const char *str

@@ -11,53 +11,103 @@
 #include <sys/types.h>
 #include <stddef.h>
 
+//!
+//! @brief The structure containing informations for a data inside a node
+//!
 typedef struct data_node
 {
-    void *ptr;
-    size_t size;
+    void *ptr;    // The pointer to the contained data
+    size_t size;  // The data size
 } data_node_t;
 
+//!
+//! @brief The node data destruction function type
+//!
 typedef void (*node_dtor_t)(void *);
 
+//!
+//! @brief The data comparator function type
+//!        The function must returns 0 if the data match,
+//!        non-zero value otherwise
+//!
 typedef int (*data_cmp_t)(const void *, const void *);
 
+//!
+//! @brief The linked list's node structure
+//!
 typedef struct node_list
 {
-    data_node_t data;
-    struct node_list *previous;
-    struct node_list *next;
+    data_node_t data;            // The node data informations
+    struct node_list *previous;  ²
+    struct node_list *next;      ²
 } node_t;
 
 ///////////// Macros to get a data from a node_t struct pointer /////////////
 
-// Get the pointer to the data inside the node
-// In case of node from ptr_list_t, returns the pointer within the node
+//!
+//! @brief Get the pointer to the data inside the node
+//!
+//! @param node The node_t pointer
+//! @param type The data type
+//! @return The casted data pointer within the node
+//!
 #define NODE_PTR(node, type) ((type *)((node)->data.ptr))
 
-// Get the value of the data inside the node
-// In case of node from ptr_list_t, dereferences the pointer within the node
+//!
+//! @brief Get the value of the data inside the node
+//!
+//! @param node The node_t pointer
+//! @param type The data type
+//! @return The data within the node
+//!
 #define NODE_DATA(node, type) (*((type *)((node)->data.ptr)))
 /////////////////////////////////////////////////////////////////////////////
 
 ///////////// Functions to create/destroy a node /////////////
 
-// Allocate a node with a zero-initialized memory of size bytes
+//!
+//! @brief Create an empty node object with a zero-initialized data
+//!
+//! @param size The data size in bytes
+//! @return The newly malloc'd node
+//!
 node_t *create_empty_node(size_t size);
 
-// Create a node with a copy of data which is size bytes ssize_t
+//!
+//! @brief Create a node object
+//!
+//! @param data The data to copy
+//! @param size The data size
+//! @return The newly malloc'd node
+//!
 node_t *create_node(const void *data, size_t size);
 
-// Create a node and store the pointer as data
+//!
+//! @brief Create a node object
+//!
+//! @param ptr The data pointer to use (malloc'd or not)
+//! @return The newly malloc'd node
+//!
 node_t *create_ptr_node(void *ptr);
 
-// Create a node and copy the string
+//!
+//! @brief Create a node object
+//!
+//! @param str The string to copy
+//! @return The newly malloc'd node
+//!
 node_t *create_string_node(const char *str);
 
-// Destroy a node, freeing the data inside using dtor
-// If dtor is not NULL, this function will always be used
-// Otherwise:
-// If use_free == 0, the pointer will not be free,
-// else the libC's free() will be used
+//!
+//! @brief Destroy a node, freeing the data inside.
+//!        If 'dtor' is not NULL, this function will always be used.
+//!        Otherwise: If 'use_free' == 0, the pointer will not be free,
+//!        else the libC's free() will be used
+//!
+//! @param node The node to destroy
+//! @param dtor The function to use to destroy the data, or NULL
+//! @param use_free boolean, must be LIST_FALSE or LIST_TRUE
+//!
 void destroy_node(node_t *node, node_dtor_t dtor, int use_free);
 /////////////////////////////////////////////////////////////////////////////
 

@@ -9,7 +9,7 @@
 
 list_t *intern_generic_list_duplicate(const list_t *this)
 {
-    list_t *dest = generic_list_create(this->__c.__dtor__);
+    list_t *dest = generic_list_create(NULL);
 
     if (!dest)
         return NULL;
