@@ -14,7 +14,7 @@ int intern_generic_list_remove(list_t *this, const void *data, size_t size)
 
     if (!node)
         return LIST_ERROR;
-    destroy_node(node, list->__dtor__, LIST_TRUE);
+    destroy_node(node, list_node_destructor(this), LIST_TRUE);
     return LIST_SUCCESS;
 }
 
@@ -26,6 +26,6 @@ int intern_generic_list_remove_cmp(list_t *this, const void *data,
 
     if (!node)
         return LIST_ERROR;
-    destroy_node(node, list->__dtor__, LIST_TRUE);
+    destroy_node(node, list_node_destructor(this), LIST_TRUE);
     return LIST_SUCCESS;
 }

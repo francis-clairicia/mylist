@@ -45,7 +45,6 @@ struct pointer_linked_list
     size_t (*const __len__)(const ptr_list_t *this);
     const node_t *(*const __begin__)(const ptr_list_t *this);
     const node_t *(*const __end__)(const ptr_list_t *this);
-    node_dtor_t (*const __get_dtor__)(const ptr_list_t *this);
 
     const node_t *(*const ptr_find)(const ptr_list_t *this, const void *ptr);
     const node_t *(*const ptr_find_cmp)(const ptr_list_t *this,
@@ -53,6 +52,7 @@ struct pointer_linked_list
     int (*const ptr_contains)(const ptr_list_t *this, const void *ptr);
 
     const container_list_t __c;
+    const node_dtor_t __node_dtor__;
 };
 
 /////////// Init/destroy a linked list ///////////

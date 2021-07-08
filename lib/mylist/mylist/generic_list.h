@@ -51,7 +51,6 @@ struct generic_linked_list
     size_t (*const __len__)(const list_t *this);
     const node_t *(*const __begin__)(const list_t *this);
     const node_t *(*const __end__)(const list_t *this);
-    node_dtor_t (*const __get_dtor__)(const list_t *this);
 
     const node_t *(*const find)(const list_t *this,
                                 const void *data, size_t size);
@@ -60,6 +59,7 @@ struct generic_linked_list
     int (*const contains)(const list_t *this, const void *data, size_t size);
 
     const container_list_t __c;
+    const node_dtor_t __node_dtor__;
 };
 
 /////////// Init/destroy a linked list ///////////

@@ -33,7 +33,11 @@ static const string_list_t STRING_LIST_MODEL =
     .str_find = &intern_string_list_find,
     .str_find_cmp = &intern_string_list_find_cmp,
     .str_contains = &intern_string_list_contains,
-    .__c = {0}
+    .__c = {
+        .start = NULL,
+        .end = NULL,
+        .size = 0
+    }
 };
 
 string_list_t *string_list_create(void)

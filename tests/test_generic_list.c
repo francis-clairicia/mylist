@@ -33,7 +33,6 @@ static void test_methods(const list_t *list)
     cr_assert_not_null(list->__len__);
     cr_assert_not_null(list->__begin__);
     cr_assert_not_null(list->__end__);
-    cr_assert_not_null(list->__get_dtor__);
     cr_assert_not_null(list->find);
     cr_assert_not_null(list->find_cmp);
     cr_assert_not_null(list->contains);
@@ -62,7 +61,7 @@ TestList(generic_list_create, allocate_a_generic_list_with_a_node_destructor)
     list_t *list = generic_list_create((node_dtor_t)&custom_int_destructor);
 
     cr_assert_not_null(list);
-    cr_assert_eq(list_destructor(list), &custom_int_destructor);
+    cr_assert_eq(list_node_destructor(list), &custom_int_destructor);
 }
 
 TestList(generic_list_push_front, insert_at_begin_of_list)
@@ -763,13 +762,13 @@ TestList(generic_list_duplicate, should_not_have_destructor)
     list_t *list1 = generic_list_create((node_dtor_t)&custom_int_destructor);
     list_t *list2 = list_dup(list1);
 
-    cr_assert_null(list_destructor(list2));
+    cr_assert_null(list_node_destructor(list2));
 }
 
 TestList(generic_list_merge, merge_two_linked_lists)
 {
     list_t *list1 = generic_list_create(NULL);
-    list_t *list2 = generic_list_create(list_destructor(list1));
+    list_t *list2 = generic_list_create(NULL);
     const size_t size = 10;
 
     for (size_t i = 0; i < size; ++i)
@@ -790,7 +789,7 @@ TestList(generic_list_merge, merge_two_linked_lists)
 TestList(generic_list_merge, swap_empty_linked_list_with_a_non_empty)
 {
     list_t *list1 = generic_list_create(NULL);
-    list_t *list2 = generic_list_create(list_destructor(list1));
+    list_t *list2 = generic_list_create(NULL);
     const size_t size = 10;
 
     for (size_t i = 0; i < size; ++i)
@@ -809,7 +808,7 @@ TestList(generic_list_merge, swap_empty_linked_list_with_a_non_empty)
 TestList(generic_list_merge, do_nothing_with_empty_list_to_merge)
 {
     list_t *list1 = generic_list_create(NULL);
-    list_t *list2 = generic_list_create(list_destructor(list1));
+    list_t *list2 = generic_list_create(list_node_destructor(list1));
     const size_t size = 10;
 
     for (size_t i = 0; i < size; ++i)

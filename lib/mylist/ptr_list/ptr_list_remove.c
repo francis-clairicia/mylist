@@ -19,7 +19,7 @@ int intern_ptr_list_remove(ptr_list_t *this, const void *ptr)
 
     if (!node)
         return LIST_ERROR;
-    destroy_node(node, list->__dtor__, LIST_FALSE);
+    destroy_node(node, list_node_destructor(this), LIST_FALSE);
     return LIST_SUCCESS;
 }
 
@@ -31,6 +31,6 @@ int intern_ptr_list_remove_cmp(ptr_list_t *this, const void *ptr,
 
     if (!node)
         return LIST_ERROR;
-    destroy_node(node, list->__dtor__, LIST_FALSE);
+    destroy_node(node, list_node_destructor(this), LIST_FALSE);
     return LIST_SUCCESS;
 }

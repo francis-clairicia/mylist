@@ -28,7 +28,6 @@ static void test_methods(const ptr_list_t *list)
     cr_assert_not_null(list->__len__);
     cr_assert_not_null(list->__begin__);
     cr_assert_not_null(list->__end__);
-    cr_assert_not_null(list->__get_dtor__);
     cr_assert_not_null(list->ptr_find);
     cr_assert_not_null(list->ptr_find_cmp);
     cr_assert_not_null(list->ptr_contains);
@@ -57,7 +56,7 @@ TestList(ptr_list_create, allocate_a_ptr_list_with_a_node_destructor)
     ptr_list_t *list = ptr_list_create((node_dtor_t)&custom_int_destructor);
 
     cr_assert_not_null(list);
-    cr_assert_eq(list_destructor(list), &custom_int_destructor);
+    cr_assert_eq(list_node_destructor(list), &custom_int_destructor);
 }
 
 TestList(ptr_list_push_front, insert_at_begin_of_list)
@@ -433,7 +432,7 @@ TestList(ptr_list_dup, should_not_have_destructor)
     ptr_list_t *list = ptr_list_create((node_dtor_t)&custom_int_destructor);
     ptr_list_t *list2 = list_dup(list);
 
-    cr_assert_null(list_destructor(list2));
+    cr_assert_null(list_node_destructor(list2));
 }
 
 TestList(ptr_list_dup, duplicate_an_empty_list)
@@ -452,7 +451,7 @@ TestList(ptr_list_merge, merge_two_linked_lists)
     int value3 = -4;
     int value4 = 42;
     ptr_list_t *list = ptr_list_create(NULL);
-    ptr_list_t *list2 = ptr_list_create(list_destructor(list));
+    ptr_list_t *list2 = ptr_list_create(NULL);
 
     cr_assert_eq(ptr_list_push_back(list, &value1), LIST_SUCCESS);
     cr_assert_eq(ptr_list_push_back(list, &value2), LIST_SUCCESS);
@@ -474,7 +473,7 @@ TestList(ptr_list_merge, swap_with_list2_if_list1_is_empty)
     int value1 = 5;
     int value2 = 27;
     ptr_list_t *list = ptr_list_create(NULL);
-    ptr_list_t *list2 = ptr_list_create(list_destructor(list));
+    ptr_list_t *list2 = ptr_list_create(NULL);
 
     cr_assert_eq(ptr_list_push_back(list2, &value1), LIST_SUCCESS);
     cr_assert_eq(ptr_list_push_back(list2, &value2), LIST_SUCCESS);
@@ -492,7 +491,7 @@ TestList(ptr_list_merge, do_nothing_if_list2_is_empty)
     int value1 = 5;
     int value2 = 27;
     ptr_list_t *list = ptr_list_create(NULL);
-    ptr_list_t *list2 = ptr_list_create(list_destructor(list));
+    ptr_list_t *list2 = ptr_list_create(list_node_destructor(list));
 
     cr_assert_eq(ptr_list_push_back(list, &value1), LIST_SUCCESS);
     cr_assert_eq(ptr_list_push_back(list, &value2), LIST_SUCCESS);

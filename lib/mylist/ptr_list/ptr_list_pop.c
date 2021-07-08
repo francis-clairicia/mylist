@@ -10,20 +10,23 @@
 void intern_ptr_list_pop(ptr_list_t *this, ssize_t idx)
 {
     container_list_t *list = (container_list_t *)&this->__c;
+    node_t *to_remove = container_remove_node(list, idx);
 
-    destroy_node(container_remove_node(list, idx), list->__dtor__, LIST_FALSE);
+    destroy_node(to_remove, list_node_destructor(this), LIST_FALSE);
 }
 
 void intern_ptr_list_pop_front(ptr_list_t *this)
 {
     container_list_t *list = (container_list_t *)&this->__c;
+    node_t *to_remove = container_remove_first_node(list);
 
-    destroy_node(container_remove_first_node(list), list->__dtor__, LIST_FALSE);
+    destroy_node(to_remove, list_node_destructor(this), LIST_FALSE);
 }
 
 void intern_ptr_list_pop_back(ptr_list_t *this)
 {
     container_list_t *list = (container_list_t *)&this->__c;
+    node_t *to_remove = container_remove_last_node(list);
 
-    destroy_node(container_remove_last_node(list), list->__dtor__, LIST_FALSE);
+    destroy_node(to_remove, list_node_destructor(this), LIST_FALSE);
 }

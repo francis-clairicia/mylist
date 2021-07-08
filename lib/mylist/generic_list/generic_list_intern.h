@@ -116,10 +116,6 @@ const node_t *intern_generic_list_end(
     const list_t *this
 );
 
-node_dtor_t intern_generic_list_get_dtor(
-    const list_t *this
-);
-
 const node_t *intern_generic_list_find(
     const list_t *this,
     const void *data,

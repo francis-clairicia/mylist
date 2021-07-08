@@ -121,8 +121,8 @@
 //! @param list The linked list pointer
 //! @return (node_dtor_t) The function pointer or NULL
 //!
-#define list_destructor(list) \
-    (list)->__get_dtor__((list))
+#define list_node_destructor(list) \
+    (list)->__node_dtor__
 //////////////////////////////////////////////////
 
 ///////////// Get/Find node in list /////////////

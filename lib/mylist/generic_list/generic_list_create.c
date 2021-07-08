@@ -33,11 +33,15 @@ static const list_t GENERIC_LIST_MODEL =
     .__len__ = &intern_generic_list_length,
     .__begin__ = &intern_generic_list_begin,
     .__end__ = &intern_generic_list_end,
-    .__get_dtor__ = &intern_generic_list_get_dtor,
     .find = &intern_generic_list_find,
     .find_cmp = &intern_generic_list_find_cmp,
     .contains = &intern_generic_list_contains,
-    .__c = {0}
+    .__c = {
+        .start = NULL,
+        .end = NULL,
+        .size = 0
+    },
+    .__node_dtor__ = NULL
 };
 
 list_t *generic_list_create(node_dtor_t destructor)
@@ -46,7 +50,9 @@ list_t *generic_list_create(node_dtor_t destructor)
 
     if (list) {
         memcpy(list, &GENERIC_LIST_MODEL, sizeof(*list));
-        ((container_list_t *)(&list->__c))->__dtor__ = destructor;
+        if (destructor) {
+            *((node_dtor_t *)(&list->__node_dtor__)) = destructor;
+        }
     }
     return list;
 }

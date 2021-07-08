@@ -26,8 +26,3 @@ const node_t *intern_generic_list_end(const list_t *this)
 {
     return this->__c.end;
 }
-
-node_dtor_t intern_generic_list_get_dtor(const list_t *this)
-{
-    return this->__c.__dtor__;
-}

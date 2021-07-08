@@ -10,20 +10,23 @@
 void intern_generic_list_pop(list_t *this, ssize_t index)
 {
     container_list_t *list = (container_list_t *)&this->__c;
+    node_t *to_remove = container_remove_node(list, index);
 
-    destroy_node(container_remove_node(list, index), list->__dtor__, LIST_TRUE);
+    destroy_node(to_remove, list_node_destructor(this), LIST_TRUE);
 }
 
 void intern_generic_list_pop_front(list_t *this)
 {
     container_list_t *list = (container_list_t *)&this->__c;
+    node_t *to_remove = container_remove_first_node(list);
 
-    destroy_node(container_remove_first_node(list), list->__dtor__, LIST_TRUE);
+    destroy_node(to_remove, list_node_destructor(this), LIST_TRUE);
 }
 
 void intern_generic_list_pop_back(list_t *this)
 {
     container_list_t *list = (container_list_t *)&this->__c;
+    node_t *to_remove = container_remove_last_node(list);
 
-    destroy_node(container_remove_last_node(list), list->__dtor__, LIST_TRUE);
+    destroy_node(to_remove, list_node_destructor(this), LIST_TRUE);
 }

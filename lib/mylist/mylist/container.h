@@ -21,7 +21,6 @@ typedef struct linked_list_container
     node_t *start;         // The linked list's head
     node_t *end;           // The linked list's tail
     size_t size;           // The linked list's size (the number of nodes)
-    node_dtor_t __dtor__;  // The node data destructor
 } container_list_t;
 
 ///////////// Functions to implement a container /////////////

@@ -26,8 +26,3 @@ const node_t *intern_ptr_list_end(const ptr_list_t *this)
 {
     return this->__c.end;
 }
-
-node_dtor_t intern_ptr_list_get_dtor(const ptr_list_t *this)
-{
-    return this->__c.__dtor__;
-}
