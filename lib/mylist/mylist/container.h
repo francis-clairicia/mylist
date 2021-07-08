@@ -68,7 +68,7 @@ node_t *container_get_node(const container_list_t *list, ssize_t index);
 //!
 //! @param list The linked list container
 //! @param data The data to match
-//! @param size The data size (not used if a comparator is given)
+//! @param size The data size (ignored if a comparator is given)
 //! @param comparator A function to use to compare the data.
 //!                   The function must returns 0 if the data match,
 //!                   non-zero value otherwise
@@ -115,7 +115,7 @@ node_t *container_remove_node(container_list_t *list, ssize_t index);
 //!
 //! @param list The linked list container
 //! @param data The data to match
-//! @param size The data size (not used if a comparator is given)
+//! @param size The data size (ignored if a comparator is given)
 //! @param comparator A function to use to compare the data.
 //!                   The function must returns 0 if the data match,
 //!                   non-zero value otherwise

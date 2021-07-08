@@ -37,12 +37,19 @@ int container_add_node_at_end(container_list_t *list, node_t *element)
     return LIST_SUCCESS;
 }
 
-static int put_node_at_index(container_list_t *l, node_t *element, size_t index)
+static int put_node_at_index(container_list_t *l, node_t *element, ssize_t idx)
 {
-    node_t *node_index = l->start;
+    node_t *node_index = NULL;
 
-    for (size_t i = 0; i < index; ++i)
-        node_index = node_index->next;
+    if (idx < 0) {
+        node_index = l->end;
+        for (ssize_t i = -1; i > (idx + 1); --i)
+            node_index = node_index->previous;
+    } else {
+        node_index = l->start;
+        for (ssize_t i = 0; i < idx; ++i)
+            node_index = node_index->next;
+    }
     node_index->previous->next = element;
     element->previous = node_index->previous;
     element->next = node_index;
@@ -53,21 +60,15 @@ static int put_node_at_index(container_list_t *l, node_t *element, size_t index)
 
 int container_add_node(container_list_t *list, node_t *element, ssize_t index)
 {
-    size_t idx = 0;
-
     if (!element)
         return LIST_ERROR;
-    if (index >= 0) {
-        if (index == 0)
-            return (container_add_node_at_start(list, element));
-        if ((size_t)index >= list->size)
-            return (container_add_node_at_end(list, element));
-    } else {
-        if (index == -1)
-            return (container_add_node_at_end(list, element));
-        if ((ssize_t)(list->size + index) < 0)
-            return (container_add_node_at_start(list, element));
-    }
-    idx = (index < 0) ? list->size + 1 + index : (size_t)index;
-    return (put_node_at_index(list, element, idx));
+    if (index == 0)
+        return (container_add_node_at_start(list, element));
+    if (index == -1)
+        return (container_add_node_at_end(list, element));
+    if (index >= 0 && (size_t)index >= list->size)
+        return (container_add_node_at_end(list, element));
+    if (index < 0 && (ssize_t)(list->size + index) < 0)
+        return (container_add_node_at_start(list, element));
+    return (put_node_at_index(list, element, index));
 }
