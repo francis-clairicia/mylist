@@ -18,7 +18,7 @@ make re -C lib/mylist
 ```
 ### Compilation
 ```sh
-gcc -lmylist -Llib -Iinclude {all_files.c} {all_files.o}
+gcc -Iinclude {all_files.c} {all_files.o} -Llib -lmylist
 ```
 ## Wiki
 Check out the [wiki](https://github.com/francis-clairicia/mylist/wiki) to see the purpose of the 3 linked lists
