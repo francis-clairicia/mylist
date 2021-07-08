@@ -21,7 +21,8 @@ typedef int (*string_cmp_t)(const char *, const char *);
 typedef struct string_linked_list string_list_t;
 
 //!
-//! @brief Structure for a linked list of strings
+//! @brief Structure for a linked list of strings. The strings are a specific
+//!        type of data which need a dedicated list implementation.
 //!
 struct string_linked_list
 {
@@ -111,7 +112,7 @@ string_list_t *array_to_string_list(const char *const *array);
 
 //!
 //! @brief Concatenate a list of string to an allocated str
-//! 
+//!
 //! @param list The string list
 //! @param separator The string to put between each string from the list.
 //!                  Can be NULL or an empty string
@@ -127,62 +128,107 @@ char *string_list_concat(
 
 ///////////// Add data to linked lists ///////////
 
-// Insert a string at a certain index
-// (If 'index' is negative the search will begin at the end)
-// Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
+//!
+//! @brief Insert a string at a certain index
+//!
+//! @param list The string list
+//! @param index (long int) The position
+//!              (If negative, the search will begin at the end)
+//! @param str The string to store (copied)
+//! @return (int) LIST_SUCCESS if it was a success, LIST_ERROR otherwise
+//!
 #define string_list_insert(list, index, str) \
     (list)->str_insert((list), (index), (str))
 
-// Insert a string at the beginning of the list
-// Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
+//!
+//! @brief Insert a string at the beginning of the list
+//!
+//! @param list The string list
+//! @param str The string to store (copied)
+//! @return (int) LIST_SUCCESS if it was a success, LIST_ERROR otherwise
+//!
 #define string_list_push_front(list, str) \
     (list)->str_push_front((list), (str))
 
-// Insert a string at the end of the list
-// Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
+//!
+//! @brief Insert a string at the end of the list
+//!
+//! @param list The string list
+//! @param str The string to store (copied)
+//! @return (int) LIST_SUCCESS if it was a success, LIST_ERROR otherwise
+//!
 #define string_list_push_back(list, str) \
     (list)->str_push_back((list), (str))
 //////////////////////////////////////////////////
 
 ///////////// Remove data in list /////////////
 
-// Remove the first occurence of a string from the list
-// Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
+//!
+//! @brief Remove the first occurence of a string from the list
+//!
+//! @param list The string list
+//! @param str The string to remove
+//! @return (int) LIST_SUCCESS if it was a success,
+//!         LIST_ERROR if the string was not found
+//!
 #define string_list_remove(list, str) \
     (list)->str_remove((list), (str))
 
-// Remove the first occurence of a string from the list using a comparator
-// The comparator function must returns 0 if the data match,
-// non-zero value otherwise
-// Returns LIST_SUCCESS (1) if it was a success, LIST_ERROR (0) otherwise
-// Returns LIST_ERROR for NULL comparator
+//!
+//! @brief Remove the first occurence of a string from the list
+//!        using a comparator by passing these strings as parameter
+//!
+//! @param list The string list
+//! @param str The string to remove
+//! @param comparator A function to use to compare the data.
+//!                   The function must returns 0 if the data match,
+//!                   non-zero value otherwise
+//! @return (int) LIST_SUCCESS if it was a success,
+//!         LIST_ERROR if the string was not found
+//!         or if 'comparator' is NULL
+//!
 #define string_list_remove_cmp(list, str, comparator) \
     (list)->str_remove_cmp((list), (str), (comparator))
 //////////////////////////////////////////////////
 
 ///////////// Find node in list /////////////
 
-// Find a string in a generic list
-// Returns the node, or NULL if the string was not found
+//!
+//! @brief Find a string in a string list
+//!
+//! @param list The string list
+//! @param str The string to find
+//! @return (const node_t *) A node pointer, or NULL
+//!         if the string was not found
+//!
 #define string_list_find(list, str)    \
     (list)->str_find((list), (str))
 
-// Find a string in a string list using a comparator by passing these strings
-// as parameter
-// The comparator function must returns 0 if the data match,
-// non-zero value otherwise
-// Returns the node, or NULL if the string was not found
-// Returns NULL for NULL comparator
+//!
+//! @brief Find a string in a string list
+//!        using a comparator by passing these strings as parameter
+//!
+//! @param list The string list
+//! @param str The string to find
+//! @param comparator A function to use to compare the data.
+//!                   The function must returns 0 if the data match,
+//!                   non-zero value otherwise
+//! @return (const node_t *) A node pointer, or NULL
+//!         if the string was not found
+//!         or if 'comparator' is NULL
+//!
 #define string_list_find_cmp(list, str, comparator)    \
     (list)->str_find_cmp((list), (str), (comparator))
 
-// Check if a string is in a generic list
-// Return 1 if it's 1, 0 otherwise
+//!
+//! @brief Check if a string is in a string list
+//!
+//! @param list The string list
+//! @param ptr The string to find
+//! @return (int) LIST_TRUE if it's true, LIST_FALSE otherwise
+//!
 #define string_list_contains(list, str)    \
     (list)->str_contains((list), (str))
 /////////////////////////////////////////////////
-
-// Get the string data inside the node (string_list_t)
-#define NODE_STR(node) ((char *)((node)->data.ptr))
 
 #endif /* !STRING_LIST_H_ */

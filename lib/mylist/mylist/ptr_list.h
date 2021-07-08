@@ -14,7 +14,10 @@
 typedef struct pointer_linked_list ptr_list_t;
 
 //!
-//! @brief Structure for linked list of pointers
+//! @brief Structure for linked lists of pointers. This list is a wrapper to use
+//!        pointers as elements for each nodes of the list. The pointer can be
+//!        allocated or not. This implementation is here to provide a better
+//!        use of pointers, instead of push it in a generic list_t.
 //!
 struct pointer_linked_list
 {

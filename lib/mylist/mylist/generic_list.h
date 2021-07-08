@@ -14,7 +14,11 @@
 typedef struct generic_linked_list list_t;
 
 //!
-//! @brief Structure for generic linked list object
+//! @brief Structure for generic linked lists object. A generic linked list
+//!        can be used to store any kind of data (scalars, structures, pointers)
+//!        at any moment.
+//!        A generic list provides a portable container for many usage.
+//!        There are data allocated for each node to make this possible.
 //!
 struct generic_linked_list
 {

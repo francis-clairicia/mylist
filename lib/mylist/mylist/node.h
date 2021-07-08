@@ -48,7 +48,7 @@ typedef struct node_list
 //! @brief Get the pointer to the data inside the node
 //!
 //! @param node The node_t pointer
-//! @param type The data type
+//! @param type The type of the pointed data
 //! @return The casted data pointer within the node
 //!
 #define NODE_PTR(node, type) ((type *)((node)->data.ptr))
@@ -61,6 +61,13 @@ typedef struct node_list
 //! @return The data within the node
 //!
 #define NODE_DATA(node, type) (*((type *)((node)->data.ptr)))
+
+//!
+//! @brief Get the string data inside the node
+//!
+//! @param node The node_t pointer
+//!
+#define NODE_STR(node) ((char *)((node)->data.ptr))
 /////////////////////////////////////////////////////////////////////////////
 
 ///////////// Functions to create/destroy a node /////////////
