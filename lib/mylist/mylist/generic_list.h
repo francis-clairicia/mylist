@@ -131,7 +131,7 @@ list_t *array_to_generic_list(
 //! @brief Insert a data at a certain index
 //!
 //! @param list The generic list pointer
-//! @param index (long int) The position
+//! @param index (signed long int) The position
 //!              (If negative, the search will begin at the end)
 //! @param data The data to store (copied)
 //! @param type The data type
@@ -145,7 +145,7 @@ list_t *array_to_generic_list(
 //!        Optimized version of generic_list_insert() for variables
 //!
 //! @param list The generic list pointer
-//! @param index (long int) The position
+//! @param index (signed long int) The position
 //!              (If negative, the search will begin at the end)
 //! @param data The data variable to store (copied)
 //! @param type The data type
@@ -204,7 +204,7 @@ list_t *array_to_generic_list(
 //! @brief Emplace a storage data at a certain index
 //!
 //! @param list The generic list pointer
-//! @param index (long int) The position
+//! @param index (signed long int) The position
 //!              (If negative the search will begin at the end)
 //! @param type The data type
 //! @return (type *) A pointer to the allocated storage,

@@ -119,7 +119,7 @@ ptr_list_t *array_to_ptr_list(const void *array, node_dtor_t destructor);
 //! @brief Insert a pointer at a certain index
 //!
 //! @param list The pointer list
-//! @param index (long int) The position
+//! @param index (signed long int) The position
 //!              (If negative, the search will begin at the end)
 //! @param ptr The pointer to store
 //! @return (int) LIST_SUCCESS if it was a success, LIST_ERROR otherwise

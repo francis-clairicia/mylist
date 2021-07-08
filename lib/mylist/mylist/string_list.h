@@ -132,7 +132,7 @@ char *string_list_concat(
 //! @brief Insert a string at a certain index
 //!
 //! @param list The string list
-//! @param index (long int) The position
+//! @param index (signed long int) The position
 //!              (If negative, the search will begin at the end)
 //! @param str The string to store (copied)
 //! @return (int) LIST_SUCCESS if it was a success, LIST_ERROR otherwise

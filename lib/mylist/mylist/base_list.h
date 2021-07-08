@@ -16,7 +16,7 @@
 //! @brief Delete a node at a certain index
 //!
 //! @param list The linked list pointer
-//! @param index (long int) The position
+//! @param index (signed long int) The position
 //!              (If negative, the search will begin at the end)
 //!
 #define list_pop(list, index)   \
@@ -149,7 +149,7 @@
 //! @brief Get a node pointer at index
 //!
 //! @param list The linked list pointer
-//! @param index (long int) The position.
+//! @param index (signed long int) The position.
 //!              (If negative the search will begin at the end)
 //! @return (const node_t *) A node pointer, or NULL if the node was not found
 //!
