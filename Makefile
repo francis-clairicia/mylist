@@ -11,7 +11,7 @@ SRC_MAIN			=	src/main.c
 
 SRC_PROJECT			=	$(addprefix ./lib/mylist/, $(SRC_LIB))
 
-SRC					=	$(SRC_MAIN) $(SRC_PROJECT)
+SRC					=	$(SRC_MAIN)
 
 SRC_TESTS			=	./tests/test_generic_list.c		\
 						./tests/test_ptr_list.c			\
@@ -60,7 +60,7 @@ coverage:
 
 debug:	CFLAGS += -g
 debug:	$(LIBS)
-	$(CC) -o $(NAME) $(SRC) $(LDFLAGS) $(LDLIBS) $(CFLAGS) $(CPPFLAGS)
+	$(CC) -o $(NAME) $(SRC_MAIN) $(SRC_PROJECT) $(CFLAGS) $(CPPFLAGS)
 
 clean:
 	$(RM) $(OBJ)
