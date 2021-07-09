@@ -6,12 +6,14 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "mylist/string_list.h"
 
 void string_list_destroy(string_list_t *list)
 {
     if (list) {
         list_clear(list);
+        memset(list, 0, sizeof(*list));
         free(list);
     }
 }
