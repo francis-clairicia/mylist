@@ -68,6 +68,13 @@ typedef struct node_list
 //! @param node The node_t pointer
 //!
 #define NODE_STR(node) ((char *)((node)->data.ptr))
+
+//!
+//! @brief Get the node data size
+//!
+//! @param node The node_t pointer
+//!
+#define NODE_SIZE(node) ((size_t)((node)->data.size))
 /////////////////////////////////////////////////////////////////////////////
 
 ///////////// Functions to create/destroy a node /////////////

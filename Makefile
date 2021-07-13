@@ -16,6 +16,7 @@ SRC					=	$(SRC_MAIN)
 SRC_TESTS			=	./tests/test_generic_list.c		\
 						./tests/test_ptr_list.c			\
 						./tests/test_string_list.c		\
+						./tests/test_node.c				\
 						./tests/test_node_iterator.c
 
 CFLAGS				=	-W -Wall -Wextra
