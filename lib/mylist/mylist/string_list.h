@@ -108,7 +108,7 @@ string_list_t *array_to_string_list(const char *const *array);
 //! @return (string_list_t *) The newly allocated list
 //!
 #define make_string_list(strings...)    \
-    array_to_string_list(_FMT_ARRAY(const char *, strings, NULL))
+    array_to_string_list(_FMT_ARRAY(char *, strings, NULL))
 
 //!
 //! @brief Concatenate a list of string to an allocated str

@@ -110,7 +110,7 @@ ptr_list_t *array_to_ptr_list(const void *array, node_dtor_t destructor);
 //! @return (ptr_list_t *) The newly allocated list
 //!
 #define make_ptr_list(destructor, pointers...)    \
-    array_to_ptr_list(_FMT_ARRAY(const void *, pointers, NULL), destructor)
+    array_to_ptr_list(_FMT_ARRAY(void *, pointers, NULL), destructor)
 ///////////////////////////////////////////////////////////////
 
 ///////////// Add data to linked lists ///////////
